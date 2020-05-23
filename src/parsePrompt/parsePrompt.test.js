@@ -83,9 +83,25 @@ describe('parsePrompt', () => {
     // %d
     // %/
     // Current working directory. If an integer follows the ‘%’, it specifies a number of trailing components of the current working directory to show; zero means the whole path. A negative integer specifies leading components, i.e. %-1d specifies the first component.
+    test('parses %d as /Users/username/Projects/zsh-prompt', () => {
+      expect(parsePrompt('%d > ')).toBe('/Users/username/Projects/zsh-prompt > ');
+    });
+    test('parses %/ as /Users/username/Projects/zsh-prompt', () => {
+      expect(parsePrompt('%/ > ')).toBe('/Users/username/Projects/zsh-prompt > ');
+    });
+
+    test('parses %2d as Projects/zsh-prompt', () => {
+      expect(parsePrompt('%2d > ')).toBe('Projects/zsh-prompt > ');
+    });
+    test('parses %3/ as username/Projects/zsh-prompt', () => {
+      expect(parsePrompt('%3/ > ')).toBe('username/Projects/zsh-prompt > ');
+    });
 
     // %~
     // As %d and %/, but if the current working directory starts with $HOME, that part is replaced by a ‘~’. Furthermore, if it has a named directory as its prefix, that part is replaced by a ‘~’ followed by the name of the directory, but only if the result is shorter than the full path; Filename Expansion.
+    test('parses %~ as ~/Projects/zsh-prompt', () => {
+      expect(parsePrompt('%~ > ')).toBe('~/Projects/zsh-prompt > ');
+    });
 
     // %e
     // Evaluation depth of the current sourced file, shell function, or eval. This is incremented or decremented every time the value of %N is set or reverted to a previous value, respectively. This is most useful for debugging as part of $PS4.

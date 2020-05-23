@@ -1,5 +1,5 @@
 import React from 'react';
-import { MACHINE_HOSTNAME, USERNAME, LOGGED_IN_LINE } from "./_shared/config";
+import { MACHINE_HOSTNAME, USERNAME, LOGGED_IN_LINE, WORKING_DIRECTORY } from "./_shared/config";
 
 
 function Footer({ withPrivileges, setWithPrivileges, lastCommandSuccessful, setLastCommandSuccessful }) {
@@ -16,6 +16,8 @@ function Footer({ withPrivileges, setWithPrivileges, lastCommandSuccessful, setL
         <dd><input type='checkbox' checked={withPrivileges} onChange={event => setWithPrivileges(event.target.checked)} /></dd>
         <dt>Last command successful</dt>
         <dd><input type='checkbox' checked={lastCommandSuccessful} onChange={event => setLastCommandSuccessful(event.target.checked)} /></dd>
+        <dt>Working directory</dt>
+        <dd>{WORKING_DIRECTORY}</dd>
       </dl>
     </footer>
   );
