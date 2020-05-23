@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
 import parsePrompt from './parsePrompt/parsePrompt';
 import './App.css';
 
@@ -10,6 +11,7 @@ const useInput = (initialState) => {
 
 function App() {
   const [promptConfig, setPromptConfig] = useInput('');
+  const [withPrivileges, setWithPrivileges] = useState(true);
 
   const handleSubmit = () => {
     console.log('You don’t need to do that');
@@ -29,12 +31,13 @@ function App() {
       <code className="terminal">
         <p className="terminal-text">
           {(promptConfig)
-            ? parsePrompt(promptConfig)
+            ? parsePrompt(promptConfig, { withPrivileges })
             : '$ '
           }
           cd somewhere
         </p>
       </code>
+      <Footer withPrivileges={withPrivileges} setWithPrivileges={setWithPrivileges} />
     </main>
   );
 }
