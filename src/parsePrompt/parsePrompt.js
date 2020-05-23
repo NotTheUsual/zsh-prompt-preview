@@ -1,6 +1,6 @@
 import { LOGGED_IN_LINE, MACHINE_HOSTNAME, USERNAME } from "../_shared/config";
 
-export default function parsePrompt(input, { withPrivileges = false } = {}) {
+export default function parsePrompt(input, { withPrivileges = false, lastCommandSuccessful = false } = {}) {
   let parsedInput = input;
 
   parsedInput = parsedInput.replace(/%l/g, LOGGED_IN_LINE.replace('tty', ''));
@@ -9,11 +9,8 @@ export default function parsePrompt(input, { withPrivileges = false } = {}) {
   parsedInput = parsedInput.replace(/%n/g, USERNAME);
   parsedInput = parsedInput.replace(/%y/g, LOGGED_IN_LINE);
 
-  if (parsedInput.match(/%#/)) {
-    parsedInput = (withPrivileges)
-      ? parsedInput.replace(/%#/g, '#')
-      : parsedInput.replace(/%#/g, '%');
-  }
+  parsedInput = parsedInput.replace(/%#/g, withPrivileges ? '#' : '%');
+  parsedInput = parsedInput.replace(/%\?/g, lastCommandSuccessful ? '0' : '1');
 
   parsedInput = parsedInput.replace(/%\)/g, ')');
   parsedInput = parsedInput.replace(/%%/g, '%');

@@ -66,6 +66,13 @@ describe('parsePrompt', () => {
 
     // %?
     // The return status of the last command executed just before the prompt.
+    test('parses %? as 0 when previous command was successful', () => {
+      expect(parsePrompt('%? > ', { lastCommandSuccessful: true })).toBe('0 > ');
+    });
+
+    test('parses %? as 1 when previous command was unsuccessful', () => {
+      expect(parsePrompt('%? > ', { lastCommandSuccessful: false })).toBe('1 > ');
+    });
 
     // %_
     // The status of the parser, i.e. the shell constructs (like ‘if’ and ‘for’) that have been started on the command line. If given an integer number that many strings will be printed; zero or negative or no integer means print as many as there are. This is most useful in prompts PS2 for continuation lines and PS4 for debugging with the XTRACE option; in the latter case it will also work non-interactively.

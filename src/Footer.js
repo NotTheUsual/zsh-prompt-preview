@@ -2,7 +2,7 @@ import React from 'react';
 import { MACHINE_HOSTNAME, USERNAME, LOGGED_IN_LINE } from "./_shared/config";
 
 
-function Footer({ withPrivileges, setWithPrivileges }) {
+function Footer({ withPrivileges, setWithPrivileges, lastCommandSuccessful, setLastCommandSuccessful }) {
   return (
     <footer className="footer">
       <dl>
@@ -14,6 +14,8 @@ function Footer({ withPrivileges, setWithPrivileges }) {
         <dd>{USERNAME}</dd>
         <dt>With privileges</dt>
         <dd><input type='checkbox' checked={withPrivileges} onChange={event => setWithPrivileges(event.target.checked)} /></dd>
+        <dt>Last command successful</dt>
+        <dd><input type='checkbox' checked={lastCommandSuccessful} onChange={event => setLastCommandSuccessful(event.target.checked)} /></dd>
       </dl>
     </footer>
   );

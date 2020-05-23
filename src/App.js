@@ -12,6 +12,7 @@ const useInput = (initialState) => {
 function App() {
   const [promptConfig, setPromptConfig] = useInput('');
   const [withPrivileges, setWithPrivileges] = useState(true);
+  const [lastCommandSuccessful, setLastCommandSuccessful] = useState(true);
 
   const handleSubmit = () => {
     console.log('You don’t need to do that');
@@ -31,13 +32,16 @@ function App() {
       <code className="terminal">
         <p className="terminal-text">
           {(promptConfig)
-            ? parsePrompt(promptConfig, { withPrivileges })
+            ? parsePrompt(promptConfig, { withPrivileges, lastCommandSuccessful })
             : '$ '
           }
           cd somewhere
         </p>
       </code>
-      <Footer withPrivileges={withPrivileges} setWithPrivileges={setWithPrivileges} />
+      <Footer
+        withPrivileges={withPrivileges} setWithPrivileges={setWithPrivileges}
+        lastCommandSuccessful={lastCommandSuccessful} setLastCommandSuccessful={setLastCommandSuccessful}
+        />
     </main>
   );
 }
