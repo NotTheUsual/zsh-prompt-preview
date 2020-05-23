@@ -179,9 +179,15 @@ describe('parsePrompt', () => {
 
     // %w
     // The date in day-dd format.
+    test('parses %w as Sun 07', () => {
+      expect(parsePrompt('%w > ')).toBe('Sun 07 > ');
+    });
 
     // %W
     // The date in mm/dd/yy format.
+    test('parses %W as 04/07/19', () => {
+      expect(parsePrompt('%W > ')).toBe('04/07/19 > ');
+    });
 
     // %D{string}
     // string is formatted using the strftime function. See man page strftime(3) for more details. Various zsh extensions provide numbers with no leading zero or space if the number is a single digit:
@@ -196,9 +202,7 @@ describe('parsePrompt', () => {
     // the hour of the day on the 12-hour clock
 
     // In addition, if the system supports the POSIX gettimeofday system call, %. provides decimal fractions of a second since the epoch with leading zeroes. By default three decimal places are provided, but a number of digits up to 9 may be given following the %; hence %6. outputs microseconds, and %9. outputs nanoseconds. (The latter requires a nanosecond-precision clock_gettime; systems lacking this will return a value multiplied by the appropriate power of 10.) A typical example of this is the format ‘%D{%H:%M:%S.%.}’.
-
     // The GNU extension %N is handled as a synonym for %9..
-
     // Additionally, the GNU extension that a ‘-’ between the % and the format character causes a leading zero or space to be stripped is handled directly by the shell for the format characters d, f, H, k, l, m, M, S and y; any other format characters are provided to the system’s strftime(3) with any leading ‘-’ present, so the handling is system dependent. Further GNU (or other) extensions are also passed to strftime(3) and may work if the system supports them.
   });
 });

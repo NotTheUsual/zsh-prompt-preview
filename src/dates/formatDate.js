@@ -13,3 +13,11 @@ export function getCurrent12HourTime() {
   // `hh` if it needs to be 02:12
   return format(new Date(Date.now()), 'h:mma').toLocaleLowerCase();
 }
+
+export function getCurrentDayDate() {
+  return format(new Date(Date.now()), 'eee dd');
+}
+
+export function getCurrentUSDate() {
+  return format(new Date(Date.now()), 'MM/dd/yy');
+}

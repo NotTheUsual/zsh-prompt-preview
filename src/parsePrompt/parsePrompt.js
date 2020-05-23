@@ -1,5 +1,5 @@
 import { LOGGED_IN_LINE, MACHINE_HOSTNAME, USERNAME, WORKING_DIRECTORY } from "../_shared/config";
-import { getCurrentDate, getCurrentTime, getCurrent12HourTime } from "../dates/formatDate";
+import { getCurrentDate, getCurrentTime, getCurrent12HourTime, getCurrentDayDate, getCurrentUSDate } from "../dates/formatDate";
 
 export default function parsePrompt(input, { withPrivileges = false, lastCommandSuccessful = false } = {}) {
   let parsedInput = input;
@@ -20,6 +20,8 @@ export default function parsePrompt(input, { withPrivileges = false, lastCommand
   parsedInput = parsedInput.replace(/%T/g, () => getCurrentTime());
   parsedInput = parsedInput.replace(/%(t|@)/g, () => getCurrent12HourTime());
   parsedInput = parsedInput.replace(/%\*/g, () => getCurrentTime({ withSeconds: true }));
+  parsedInput = parsedInput.replace(/%w/g, () => getCurrentDayDate());
+  parsedInput = parsedInput.replace(/%W/g, () => getCurrentUSDate());
 
   parsedInput = parsedInput.replace(/%\)/g, ')');
   parsedInput = parsedInput.replace(/%%/g, '%');
