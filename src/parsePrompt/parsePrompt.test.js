@@ -1,5 +1,9 @@
 import parsePrompt from './parsePrompt';
 
+// Test cases sourced from:
+// http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+// ...and trying things out in my own terminal
+
 describe('parsePrompt', () => {
   test('parses plain text', () => {
     expect(parsePrompt('Hello ')).toBe('Hello ');
@@ -132,5 +136,69 @@ describe('parsePrompt', () => {
     // %.
     // %C
     // Trailing component of the current working directory. An integer may follow the ‘%’ to get more than one component. Unless ‘%C’ is used, tilde contraction is performed first. These are deprecated as %c and %C are equivalent to %1~ and %1/, respectively, while explicit positive integers have the same effect as for the latter two sequences.
+  });
+
+  describe('Date and time', () => {
+    const realDate = Date.now;
+
+    beforeAll(() => {
+      global.Date.now = jest.fn(() => new Date('2019-04-07T14:20:30').getTime());
+    });
+
+    afterAll(() => {
+      global.Date.now = realDate;
+    });
+
+    // %D
+    // The date in yy-mm-dd format.
+    test('parses %D as 19-04-07', () => {
+      expect(parsePrompt('%D > ')).toBe('19-04-07 > ');
+    });
+
+    // %T
+    // Current time of day, in 24-hour format.
+    test('parses %T as 14:20', () => {
+      expect(parsePrompt('%T > ')).toBe('14:20 > ');
+    });
+
+    // %t
+    // %@
+    // Current time of day, in 12-hour, am/pm format.
+    test('parses %t as 2:20pm', () => {
+      expect(parsePrompt('%t > ')).toBe('2:20pm > ');
+    });
+    test('parses %@ as 2:20pm', () => {
+      expect(parsePrompt('%@ > ')).toBe('2:20pm > ');
+    });
+
+    // %*
+    // Current time of day in 24-hour format, with seconds.
+    test('parses %* as 14:20:30', () => {
+      expect(parsePrompt('%* > ')).toBe('14:20:30 > ');
+    });
+
+    // %w
+    // The date in day-dd format.
+
+    // %W
+    // The date in mm/dd/yy format.
+
+    // %D{string}
+    // string is formatted using the strftime function. See man page strftime(3) for more details. Various zsh extensions provide numbers with no leading zero or space if the number is a single digit:
+
+    // %f
+    // a day of the month
+
+    // %K
+    // the hour of the day on the 24-hour clock
+
+    // %L
+    // the hour of the day on the 12-hour clock
+
+    // In addition, if the system supports the POSIX gettimeofday system call, %. provides decimal fractions of a second since the epoch with leading zeroes. By default three decimal places are provided, but a number of digits up to 9 may be given following the %; hence %6. outputs microseconds, and %9. outputs nanoseconds. (The latter requires a nanosecond-precision clock_gettime; systems lacking this will return a value multiplied by the appropriate power of 10.) A typical example of this is the format ‘%D{%H:%M:%S.%.}’.
+
+    // The GNU extension %N is handled as a synonym for %9..
+
+    // Additionally, the GNU extension that a ‘-’ between the % and the format character causes a leading zero or space to be stripped is handled directly by the shell for the format characters d, f, H, k, l, m, M, S and y; any other format characters are provided to the system’s strftime(3) with any leading ‘-’ present, so the handling is system dependent. Further GNU (or other) extensions are also passed to strftime(3) and may work if the system supports them.
   });
 });
