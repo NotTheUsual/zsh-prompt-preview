@@ -25,7 +25,7 @@ function App() {
         <label for="input" className="label">
           Enter config string
         </label>
-        <span className="input-context">PS1=“</span>
+        <span className="input-context">PROMPT=“</span>
         <input type="text" className="input" value={promptConfig} onChange={setPromptConfig} />
         <span className="input-context">”</span>
       </form>

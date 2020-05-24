@@ -10,7 +10,7 @@ export function getCurrentTime({ withSeconds = false } = {}) {
 }
 
 export function getCurrent12HourTime() {
-  // `hh` if it needs to be 02:12
+  // This actually appears to be ' '-padded, which isn't inherently supported by dateFns
   return format(new Date(Date.now()), 'h:mma').toLocaleLowerCase();
 }
 
