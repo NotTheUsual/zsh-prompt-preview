@@ -29,6 +29,13 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.input {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #aaa;
+  font-size: 1em;
+}
+
 .terminal {
   background: #000;
   border-radius: 0.25rem;
