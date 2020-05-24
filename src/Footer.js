@@ -1,11 +1,12 @@
 import React from 'react';
 import { MACHINE_HOSTNAME, USERNAME, LOGGED_IN_LINE, WORKING_DIRECTORY } from "./_shared/config";
+import './Footer.css';
 
 
 function Footer({ withPrivileges, setWithPrivileges, lastCommandSuccessful, setLastCommandSuccessful }) {
   return (
     <footer className="footer">
-      <dl>
+      <dl className="footer__config">
         <dt>The line (tty) the user is logged in on</dt>
         <dd>{LOGGED_IN_LINE}</dd>
         <dt>Machine hostname</dt>
