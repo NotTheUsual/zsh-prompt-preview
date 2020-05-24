@@ -4,6 +4,8 @@ Look, I'll be honest - I though the only existing way to check the results of a 
 
 Anyway, with the caveat that you shouldn't use this, it's simple enough. Stick the prompt config in the input on the left and see the result in the preview on the right. Below that you can see the pretend system settings I'm using (the dates/times are currently just the current date/time). The obvious caveat is that I haven't implemented all the rules. So, you know, again, don't use this.
 
+![Screenshot of what it looks like running](./screenshot.png)
+
 Things what I should do
 - put the implemented (...and non-implemented) rules on screen
 - implement all the rules!
